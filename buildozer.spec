@@ -1,27 +1,40 @@
-[app]
+name: Build APK
 
-# نام اپلیکیشن
-title = MyApp
-# package name (بدون فاصله و فقط انگلیسی)
-package.name = myapp
-# domain دلخواه
-package.domain = org.example
-# مسیر سورس کد
-source.dir = .
-# فایل‌هایی که شامل می‌شوند
-source.include_exts = py,png,jpg,kv,atlas
-# نسخه اپ
-version = 0.1
-# فایل اصلی برنامه
-entrypoint = main_kivy.py
+on:
+  push:
+    branches:
+      - main
 
-# Android
-[buildozer]
+jobs:
+  build:
+    runs-on: ubuntu-latest
 
-# بدون پرسش root
-android.permissions = INTERNET
-android.api = 33
-android.ndk = 25b
-android.arch = armeabi-v7a
-android.minapi = 21
-android.sdk = 33
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y \
+            python3-pip \
+            git \
+            zip \
+            unzip \
+            openjdk-17-jdk
+          pip install --upgrade pip
+          pip install buildozer cython
+
+      - name: Build APK
+        run: |
+          buildozer -v android debug
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyApp-APK
+          path: bin/*.apk
