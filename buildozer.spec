@@ -17,3 +17,4 @@ ndk = 25b
 arch = armeabi-v7a
 minapi = 21
 sdk = 33
+build_tools_version = 33.0.2
