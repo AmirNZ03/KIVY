@@ -13,8 +13,8 @@ log_level = 2
 [app.android]
 permissions = INTERNET
 api = 33
-ndk = 25b
-arch = armeabi-v7a
-minapi = 21
 sdk = 33
+ndk = 25b
+arch = arm64-v8a
+minapi = 21
 build_tools_version = 33.0.2
