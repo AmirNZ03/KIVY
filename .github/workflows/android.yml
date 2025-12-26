@@ -36,6 +36,8 @@ jobs:
         run: |
           mkdir -p ~/.buildozer/android/platform
           yes | buildozer android accept_sdk_license
+          run: yes | sdkmanager --licenses
+
 
       - name: Build APK
         run: |
