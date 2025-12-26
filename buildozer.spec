@@ -11,6 +11,7 @@ entrypoint = main_kivy.py
 log_level = 2
 
 [app.android]
+android.gradle = True
 permissions = INTERNET
 api = 33
 sdk = 33
