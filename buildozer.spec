@@ -10,6 +10,7 @@ entrypoint = main_kivy.py
 [buildozer]
 log_level = 2
 
+
 [app.android]
 android.gradle = True
 permissions = INTERNET
